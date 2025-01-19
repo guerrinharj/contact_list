@@ -61,6 +61,17 @@ cd contact_list
   exit
 ```
 
+### Run Rails server
+
+```bash
+cd contact_list
+    ./devops/compose/up.sh
+    ./devops/rails/server.sh
+    # CTRL + C
+    ./devops/compose/down.sh
+  exit
+```
+
 ### Update DB and Rails
 
 ```bash
@@ -85,5 +96,9 @@ cd contact_list
 - If you're having trouble when opening on a DB management system (like Beekeeper, DBeaver, PG Admin, etc.), don't forget that you need to run the container and use `localhost` as your host. 
 - If any role issues appear Don't be afraid to `pkill postgres` and `brew services stop postgresql` (If you're running in homebrew).
 - If you are having trouble with users accessing the DB, rebuild the container.
+
+## Request cURLs
+
+- Use `examples.txt` to get example of cURLs for requests.
 
 <h2>That's it. Happy coding :computer:</h2> 

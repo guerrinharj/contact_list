@@ -18,9 +18,10 @@ class AuthController < ApplicationController
     def forgot_password
         user = User.find_by(email: params[:user][:email])
         if user
+            UserMailer.forgot_password(user).deliver_now
             render json: { message: 'Password reset instructions sent to your email' }, status: :ok
         else
-            render json: { errors: ['Email not found'] }, status: :not_found
+            
         end
     end
 

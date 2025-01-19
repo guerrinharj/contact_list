@@ -14,7 +14,7 @@ services:
       DATABASE_URL: "postgres://db:5432/${POSTGRES_DB}"
     depends_on:
       - db
-    command: bash -c "rm -f tmp/pids/server.pid && rails server -b 0.0.0.0"
+    command: tail -f /dev/null
 
   db:
     image: postgres:15
