@@ -1,11 +1,13 @@
 require 'net/http'
 require 'uri'
 require 'json'
+require 'cpf_cnpj'
 
 class Contact < ApplicationRecord
   belongs_to :user
 
   before_validation :sanitize_postal_code, :sanitize_tax_number
+  before_save :fetch_coordinates_from_google
 
   validates :name, presence: true
   validates :tax_number, presence: true, uniqueness: true
@@ -15,6 +17,7 @@ class Contact < ApplicationRecord
   validates :postal_code, presence: true
   validate :valid_postal_code
   validate :valid_tax_number
+
 
   private
 
@@ -45,16 +48,41 @@ class Contact < ApplicationRecord
     if response.is_a?(Net::HTTPSuccess)
       json_response = JSON.parse(response.body)
 
-
       unless json_response['cep']
         errors.add(:postal_code, 'is invalid according to ViaCEP')
       end
     else
       errors.add(:postal_code, 'could not be validated due to API failure')
     end
-
   rescue StandardError => e
     errors.add(:postal_code, "validation failed: #{e.message}")
   end
 
+  def fetch_coordinates_from_google
+    return if postal_code.blank?
+
+    api_key = ENV['GOOGLE_MAPS_API_KEY']
+    address = URI.encode_www_form_component(postal_code)
+    uri = URI.parse("https://maps.googleapis.com/maps/api/geocode/json?address=#{address}&key=#{api_key}")
+
+    response = Net::HTTP.get_response(uri)
+
+    if response.is_a?(Net::HTTPSuccess)
+      json_response = JSON.parse(response.body)
+
+      if json_response['status'] == 'OK'
+        location = json_response['results'].first['geometry']['location']
+        self.latitude = location['lat']
+        self.longitude = location['lng']
+      elsif json_response['status'] != 'OK' && json_response['error_message']
+        errors.add(:base, "Google Maps API error: #{json_response['error_message']}")
+      else
+        errors.add(:postal_code, 'could not fetch coordinates from Google Maps')
+      end
+    else
+      errors.add(:base, 'Failed to connect to Google Maps API')
+    end
+  rescue StandardError => e
+    errors.add(:base, "Error fetching coordinates: #{e.message}")
+  end
 end

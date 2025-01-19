@@ -106,9 +106,7 @@ curl --location 'http://localhost:3000/contacts' \
         "address_name": "Rua João Pessoa",
         "address_number": "50",
         "address_complement": "Casa",
-        "postal_code": "80010-000",
-        "latitude": -25.428356,
-        "longitude": -49.273252,
+        "postal_code": "80010-000"
   }
 }'
 
