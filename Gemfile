@@ -7,7 +7,8 @@ gem 'rspec-rails', '~> 6.0'
 gem 'rails', '~> 6.1.7'
 gem 'pg', '>= 1.1'
 gem 'puma', '~> 5.0'
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7' 
+gem 'jwt', '~> 2.0'  
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'concurrent-ruby', '1.3.4'
 
