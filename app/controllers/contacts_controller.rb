@@ -1,3 +1,7 @@
+require 'net/http'
+require 'uri'
+require 'json'
+
 class ContactsController < ApplicationController
     before_action :authorize
     before_action :set_contact, only: [:show, :update, :destroy]
@@ -36,6 +40,27 @@ class ContactsController < ApplicationController
     def destroy
         @contact.destroy
         render json: { message: 'Contact deleted successfully' }, status: :ok
+    end
+
+    def find_address
+        postal_code = params[:postal_code].to_s.gsub(/\D/, '')
+        return render json: { errors: ['Postal code is required'] }, status: :bad_request if postal_code.blank?
+    
+        uri = URI.parse("https://viacep.com.br/ws/#{postal_code}/json/")
+        response = Net::HTTP.get_response(uri)
+    
+        if response.is_a?(Net::HTTPSuccess)
+            address_data = JSON.parse(response.body)
+            if address_data['cep']
+                render json: address_data, status: :ok
+            else
+                render json: { errors: ['Invalid postal code'] }, status: :unprocessable_entity
+            end
+            else
+            render json: { errors: ['Failed to fetch address from ViaCEP'] }, status: :service_unavailable
+        end
+    rescue StandardError => e
+        render json: { errors: ["Error fetching address: #{e.message}"] }, status: :internal_server_error
     end
 
     private
