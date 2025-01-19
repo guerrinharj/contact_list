@@ -118,3 +118,11 @@ curl --location --request DELETE 'http://localhost:3000/contacts/1' \
 --header 'Password: password123' \
 --header 'Content-Type: application/json' \
 --data ''
+
+
+# FIND ADDRESS (GET)
+
+
+curl --location 'http://localhost:3000/contacts/find_address?postal_code=01310-100' \
+--header 'Email: teste@email.com' \
+--header 'Password: password123'
