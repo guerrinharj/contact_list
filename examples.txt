@@ -1,0 +1,12 @@
+#SIGNUP POST
+
+curl --location 'http://localhost:3000/signup' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "user": {
+    "email": "test@example.com",
+    "password": "password123",
+    "password_confirmation": "password123"
+  }
+}
+'
