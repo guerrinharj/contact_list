@@ -1,4 +1,3 @@
-# Ensure the devops/compose directory has executable scripts
 chmod +x ./devops/compose/build.sh
 
 echo "Installing dependencies and gems..."
