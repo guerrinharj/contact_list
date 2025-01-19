@@ -82,15 +82,15 @@ curl --location 'http://localhost:3000/contacts' \
 --header 'Content-Type: application/json' \
 --data '{
   "contact": {
-    "name": "John Doe",
-    "tax_number": "123.456.789-09",
-    "phone": "123456789",
-    "address_name": "Main Street",
-    "address_number": "123",
-    "address_complement": "Apt 456",
-    "postal_code": "12345-678",
-    "latitude": -23.55052,
-    "longitude": -46.633308
+        "name": "Ana Pereira",
+        "tax_number": "456.789.123-45",
+        "phone": "41987654321",
+        "address_name": "Rua João Pessoa",
+        "address_number": "50",
+        "address_complement": "Casa",
+        "postal_code": "80010-000",
+        "latitude": -25.428356,
+        "longitude": -49.273252,
   }
 }'
 
