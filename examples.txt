@@ -10,3 +10,20 @@ curl --location 'http://localhost:3000/signup' \
   }
 }
 '
+
+
+# LOGIN (POST)
+
+
+curl --location 'http://localhost:3000/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "user": {
+    "email": "test@example.com",
+    "password": "password123"
+  }
+}
+'
+
+
+
