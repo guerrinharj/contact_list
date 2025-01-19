@@ -11,6 +11,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'jwt', '~> 2.0'  
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'concurrent-ruby', '1.3.4'
+gem 'cpf_cnpj'
 
 
 # Reduces boot times through caching; required in config/boot.rb

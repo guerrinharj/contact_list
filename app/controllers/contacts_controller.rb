@@ -1,6 +1,7 @@
 require 'net/http'
 require 'uri'
 require 'json'
+require 'cpf_cnpj'
 
 class ContactsController < ApplicationController
     before_action :authorize
