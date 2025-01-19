@@ -9,9 +9,12 @@ class ContactsController < ApplicationController
 
     def index
         contacts = @current_user.contacts
-        contacts = contacts.where('LOWER(name) LIKE ? OR LOWER(tax_number) LIKE ?', "%#{params[:query].downcase}%", "%#{params[:query].downcase}%") if params[:query].present?
+
+        contacts = contacts.where('LOWER(name) LIKE ?', "%#{params[:name].downcase}%") if params[:name].present?
+        contacts = contacts.where('tax_number = ?', params[:tax_number].gsub(/\D/, '')) if params[:tax_number].present?
+
         contacts = contacts.order(:name)
-        
+
         render json: contacts
     end
 
