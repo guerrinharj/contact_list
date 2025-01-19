@@ -65,6 +65,24 @@ curl --location 'http://localhost:3000/contacts' \
 --data ''
 
 
+# GET CONTACTS FILTER CPF (GET)
+
+curl --location 'http://localhost:3000/contacts?tax_number=14268823786' \
+--header 'Email: teste@email.com' \
+--header 'Password: password123' \
+--header 'Content-Type: application/json' \
+--data ''
+
+
+# GET CONTACTS FILTER NAME (GET)
+
+curl --location 'http://localhost:3000/contacts?name=Gabriel%20Guerra' \
+--header 'Email: teste@email.com' \
+--header 'Password: password123' \
+--header 'Content-Type: application/json' \
+--data ''
+
+
 # GET CONTACT (GET)
 
 curl --location 'http://localhost:3000/contacts/1' \
