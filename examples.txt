@@ -26,4 +26,30 @@ curl --location 'http://localhost:3000/login' \
 '
 
 
+# FORGOT PASSWORD (POST)
 
+
+curl --location 'http://localhost:3000/forgot_password' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "user": {
+    "email": "test@example.com",
+    "password": "password123"
+  }
+}
+'
+
+
+
+# DELETE ACCOUNT (DELETE)
+
+
+curl --location --request DELETE 'http://localhost:3000/delete_account' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "user": {
+    "email": "test@example.com",
+    "password": "password123",
+    "password_confirmation": "password123"
+  }
+}'

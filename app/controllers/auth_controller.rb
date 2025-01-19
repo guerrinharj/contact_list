@@ -1,4 +1,7 @@
 class AuthController < ApplicationController
+    before_action :fetch_user, only: [:login, :forgot_password, :delete_account]
+    before_action :authenticate_user, only: [:login, :delete_account]
+
     def signup
         user = User.new(user_params)
         if user.save
@@ -9,17 +12,11 @@ class AuthController < ApplicationController
     end
 
     def login
-        user_params = params.require(:user).permit(:email, :password) 
-        user = User.find_by(email: user_params[:email])              
-        if user&.authenticate(user_params[:password])              
-            render json: { message: 'Login successful', user: user }, status: :ok
-        else
-            render json: { errors: ['Invalid email or password'] }, status: :unauthorized
-        end
+        render json: { message: 'Login successful', user: @user }, status: :ok
     end
 
     def forgot_password
-        user = User.find_by(email: params[:email])
+        user = User.find_by(email: params[:user][:email])
         if user
             render json: { message: 'Password reset instructions sent to your email' }, status: :ok
         else
@@ -27,9 +24,33 @@ class AuthController < ApplicationController
         end
     end
 
+    def delete_account
+        password_confirmation = params[:user][:password_confirmation]
+        unless password_confirmation == params[:user][:password]
+            render json: { errors: ['Password confirmation does not match'] }, status: :unprocessable_entity
+            return
+        end
+
+        @user.destroy
+        render json: { message: 'Account deleted successfully' }, status: :ok
+    end
+
     private
 
     def user_params
         params.require(:user).permit(:email, :password, :password_confirmation)
+    end
+
+    def fetch_user
+        @user = User.find_by(email: params[:user][:email])
+        unless @user
+            render json: { errors: ['Invalid email or password'] }, status: :unauthorized
+        end
+    end
+
+    def authenticate_user
+        unless @user&.authenticate(params[:user][:password])
+            render json: { errors: ['Invalid email or password'] }, status: :unauthorized
+        end
     end
 end
