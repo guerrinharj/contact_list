@@ -1,4 +1,6 @@
 class AuthController < ApplicationController
+    skip_before_action :authorize
+    
     before_action :fetch_user, only: [:login, :forgot_password, :delete_account]
     before_action :authenticate_user, only: [:login, :delete_account]
 
