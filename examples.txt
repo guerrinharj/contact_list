@@ -1,4 +1,4 @@
-#SIGNUP POST
+# SIGNUP (POST)
 
 curl --location 'http://localhost:3000/signup' \
 --header 'Content-Type: application/json' \
