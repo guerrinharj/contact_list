@@ -5,21 +5,38 @@ This is an API that i made as a challenge for UEX, it basically ia contact manag
 As an User you are able to:
 - Signup to the platform (using username, password and password confirmation).
 - Login to the platform (providing username and password)
-- Change the password in case you missed (an email will be sent with the instructions).
+- Logout off the platform (providing username and password)
+- Change the password in case you missed (providing username and password and an email will be sent with the instructions).
+- Delete your account (providing username and password)
 
+
+After logged as an User will you will be able to manage your contact:
+- You can get a list from all contacts, and you will also be able to filter by name and/or CPF.
+- Get a specific contact information.
+- Create a contact by providing name, CPF, phone, address (street name and number) and postal code (needs to be valid accordingly to ViaCEP system). Once you provide those informations, you will receive the latitude and longitude of the contact address (provided by Google Maps).
+- Update a contact information.
+- Delete a contact.
+- Find the contact address by providing a CEP (needs to be valid accordingly to ViaCEP system).
+
+
+## Attention
+
+- Be aware that by using this API you will need to create a PostgreSQL database and have a valid Google Maps API Key that needs to be set out to your `.env` file, use `.env.example` as a blueprint.
 
 ## Versions :gem:
 * **Ruby:** 3.1.0
 * **Rails:** 6.0.3
 
-#### Setup the API :monorail:
+#### Setup the API locally :monorail:
 
 1. Run `bundle install` to install all the dependencies of the project;
 2. Set up `config/database.yml` and add your database credentials;
 3. Set up `.env` accordingly to your `config/database.yml` file.
-3. Run `rails db:drop db:create db:migrate` to create the database and apply the migrations and seeds;
-4. Run `rspec` to check for tests;
-5. Run `rails s` and go for your localhost port.
+4. Run `rails db:drop db:create db:migrate` to create the database and apply the migrations and seeds;
+5. Run `rake user` to create a user, you will be asked in terminal to have for email and password;
+6. If you feel like it, create a valid contact (me) by running `rails db:seed`
+7. Run `rspec` to check for tests;
+8. Run `rails s` and go for your localhost port.
 
 ## Docker :whale:
 
