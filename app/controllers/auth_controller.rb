@@ -1,8 +1,8 @@
 class AuthController < ApplicationController
     skip_before_action :authorize
     
-    before_action :fetch_user, only: [:login, :delete_account]
-    before_action :authenticate_user, only: [:login, :delete_account]
+    before_action :fetch_user, only: [:login, :logout, :delete_account]
+    before_action :authenticate_user, only: [:login, :logout, :delete_account]
 
     def signup
         user = User.new(user_params)
@@ -15,6 +15,10 @@ class AuthController < ApplicationController
 
     def login
         render json: { message: 'Login successful', user: @user }, status: :ok
+    end
+
+    def logout
+        render json: { message: 'Logout successful' }, status: :ok
     end
 
     def forgot_password

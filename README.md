@@ -1,5 +1,12 @@
 # CONTACT LIST API
 
+This is an API that i made as a challenge for UEX, it basically ia contact management system,integrating with Via CEP (for CEP validations) and Google Maps (for creating latitude and longitude) 
+
+As an User you are able to:
+- Signup to the platform (using username, password and password confirmation).
+- Login to the platform (providing username and password)
+- Change the password in case you missed (an email will be sent with the instructions).
+
 
 ## Versions :gem:
 * **Ruby:** 3.1.0
