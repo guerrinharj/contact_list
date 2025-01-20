@@ -1,7 +1,7 @@
 class AuthController < ApplicationController
     skip_before_action :authorize
     
-    before_action :fetch_user, only: [:login, :forgot_password, :delete_account]
+    before_action :fetch_user, only: [:login, :delete_account]
     before_action :authenticate_user, only: [:login, :delete_account]
 
     def signup
@@ -23,7 +23,7 @@ class AuthController < ApplicationController
             UserMailer.forgot_password(user).deliver_now
             render json: { message: 'Password reset instructions sent to your email' }, status: :ok
         else
-            
+            render json: { message: 'Email not found' }, status: :not_found
         end
     end
 
