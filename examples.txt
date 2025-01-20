@@ -26,6 +26,20 @@ curl --location 'http://localhost:3000/login' \
 '
 
 
+# LOGOUT (POST)
+
+curl --location 'http://localhost:3000/logout' \
+--header 'Content-Type: application/json' \
+--header 'Email: gabrielpessoaguerracavalcanti@gmail.com' \
+--data-raw '{
+  "user": {
+    "email": "gabrielpessoaguerracavalcanti@gmail.com",
+    "password": "password123"
+  }
+}
+'
+
+
 # FORGOT PASSWORD (POST)
 
 

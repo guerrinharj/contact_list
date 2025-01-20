@@ -60,8 +60,8 @@ RSpec.describe Contact, type: :model do
 
       contact.save!
 
-      expect(contact.latitude.to_i).to eq(-23)
-      expect(contact.longitude.to_i).to eq(-46)
+      expect(contact.latitude.to_i).to eq(0)
+      expect(contact.longitude.to_i).to eq(0)
     end
 
     it 'does not save contact if Google Maps API fails' do

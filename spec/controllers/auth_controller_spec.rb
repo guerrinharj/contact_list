@@ -45,6 +45,26 @@ RSpec.describe AuthController, type: :controller do
         end
     end
 
+    describe 'POST #logout' do
+        context 'with valid credentials' do
+            it 'logout and returns success' do
+                post :logout, params: { user: { email: existing_user.email, password: existing_user.password } }
+
+                expect(response).to have_http_status(:ok)
+                expect(JSON.parse(response.body)['message']).to eq('Logout successful')
+            end
+        end
+
+        context 'with invalid credentials' do
+            it 'returns unauthorized status' do
+                post :logout, params: { user: { email: existing_user.email, password: 'wrongpassword' } }
+
+                expect(response).to have_http_status(:unauthorized)
+                expect(JSON.parse(response.body)['errors']).to include('Invalid email or password')
+            end
+        end
+    end
+
     describe 'POST #forgot_password' do
         context 'with a valid email' do
             it 'sends password reset instructions' do
