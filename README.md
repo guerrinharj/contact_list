@@ -66,6 +66,7 @@ After logged as an User will you will be able to manage your contact:
 - Make sure of permissions of your OS and terminal system are on point. (Don't be afraid to change the shebang in case you need)
 - If you're not installing for the first time, don't overwrite archives
 - If you're installing a new gem, be always sure to rebuild.
+- This application use a series of shell scripts in order to simplify commands, they're all written inside the `devops` folder.
 
 
 ### Build the container and start the DB
