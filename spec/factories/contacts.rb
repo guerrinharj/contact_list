@@ -8,7 +8,5 @@ FactoryBot.define do
         address_number { Faker::Address.building_number }
         address_complement { Faker::Address.secondary_address }
         postal_code { '01310-100' }
-        latitude { Faker::Address.latitude }
-        longitude { Faker::Address.longitude }
     end
 end

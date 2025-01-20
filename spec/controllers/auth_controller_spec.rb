@@ -73,9 +73,9 @@ RSpec.describe AuthController, type: :controller do
             it 'deletes the user account and returns success' do
                 delete :delete_account, params: {
                     user: {
-                    email: existing_user.email,
-                    password: existing_user.password,
-                    password_confirmation: existing_user.password
+                        email: existing_user.email,
+                        password: existing_user.password,
+                        password_confirmation: existing_user.password
                     }
                 }
 
@@ -88,9 +88,9 @@ RSpec.describe AuthController, type: :controller do
             it 'returns an unprocessable entity status' do
                 delete :delete_account, params: {
                     user: {
-                    email: existing_user.email,
-                    password: existing_user.password,
-                    password_confirmation: 'wrongconfirmation'
+                        email: existing_user.email,
+                        password: existing_user.password,
+                        password_confirmation: 'wrongconfirmation'
                     }
                 }
 
@@ -103,9 +103,9 @@ RSpec.describe AuthController, type: :controller do
             it 'returns an unauthorized status' do
                 delete :delete_account, params: {
                     user: {
-                    email: existing_user.email,
-                    password: 'wrongpassword',
-                    password_confirmation: 'wrongpassword'
+                        email: existing_user.email,
+                        password: 'wrongpassword',
+                        password_confirmation: 'wrongpassword'
                     }
                 }
 

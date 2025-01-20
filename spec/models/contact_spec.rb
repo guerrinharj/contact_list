@@ -56,12 +56,20 @@ RSpec.describe Contact, type: :model do
 
   context 'Google Maps API integration' do
     it 'fetches latitude and longitude for a valid postal code' do
-      contact.postal_code = '01310-100'
-      allow(contact).to receive(:fetch_coordinates_from_google).and_return(true)
+      contact.send(:fetch_coordinates_from_google)
 
-      contact.valid?
-      expect(contact.latitude).to_not be_nil
-      expect(contact.longitude).to_not be_nil
+      contact.save!
+
+      expect(contact.latitude.to_i).to eq(-23)
+      expect(contact.longitude.to_i).to eq(-46)
+    end
+
+    it 'does not save contact if Google Maps API fails' do
+      contact.postal_code = '00000-000'
+
+      contact.send(:fetch_coordinates_from_google)
+
+      expect(contact).to_not be_valid
     end
   end
 end
